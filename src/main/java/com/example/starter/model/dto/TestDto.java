@@ -1,8 +1,8 @@
-package com.example.starter;
+package com.example.starter.model.dto;
 
-public class StatusResponse {
+public class TestDto {
     private String status;
-    public StatusResponse(String status){
+    public TestDto(String status){
         this.status = status;
     }
     public String getStatus(){

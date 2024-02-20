@@ -1,5 +1,6 @@
-package com.example.starter;
+package com.example.starter.config;
 
+import com.example.starter.exception.UserNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;

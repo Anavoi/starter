@@ -1,4 +1,4 @@
-package com.example.starter;
+package com.example.starter.model.entity;
 
 import jakarta.persistence.*;
 
@@ -10,7 +10,7 @@ import static jakarta.persistence.GenerationType.SEQUENCE;
 
 @Entity
 @Table(name="users")
-public class User {
+public class UserEntity {
     @Id
     @GeneratedValue(strategy= SEQUENCE, generator = "USERS_SEQUENCE_GENERATOR")
     @SequenceGenerator(name="USERS_SEQUENCE_GENERATOR",
@@ -21,9 +21,9 @@ public class User {
     private String email;
     private String password;
 
-    protected User(){}
+    public UserEntity(){}
 
-    public User(String name, String email, String password){
+    public UserEntity(String name, String email, String password){
         this.name = name;
         this.email = email;
         this.password = getSha256(password);
