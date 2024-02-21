@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api")
 public class TestController {
     @GetMapping("/test")
-    public TestDto getController(){
+    public TestDto getController() {
         return new TestDto("OK");
     }
 }

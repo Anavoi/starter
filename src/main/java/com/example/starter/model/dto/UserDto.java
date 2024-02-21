@@ -3,9 +3,13 @@ package com.example.starter.model.dto;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Email;
+import lombok.*;
 import org.springframework.lang.Nullable;
 
-
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class UserDto {
     @Nullable
     private Long id;
@@ -17,28 +21,4 @@ public class UserDto {
     private String email;
     @NotEmpty
     private String password;
-    public UserDto(){}
-
-    public Long getId(){
-        return this.id;
-    }
-    public String getName(){
-        return this.name;
-    }
-    public String getEmail(){
-        return this.email;
-    }
-    public String getPassword(){
-        return this.password;
-    }
-    public void setId(Long id){this.id = id;}
-    public void setName(String name){
-        this.name = name;
-    }
-    public void setEmail(String email){
-        this.email = email;
-    }
-    public void setPassword(String password){
-        this.password = password;
-    }
 }

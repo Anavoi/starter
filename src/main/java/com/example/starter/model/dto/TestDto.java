@@ -1,11 +1,10 @@
 package com.example.starter.model.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
+@Getter
+@AllArgsConstructor
 public class TestDto {
-    private String status;
-    public TestDto(String status){
-        this.status = status;
-    }
-    public String getStatus(){
-        return this.status;
-    }
+    private final String status;
 }
