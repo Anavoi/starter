@@ -6,13 +6,10 @@ import com.github.javafaker.service.FakeValuesService;
 import com.github.javafaker.service.RandomService;
 
 import java.util.Locale;
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class MockUtils {
-    private static AtomicLong ID_GENERATOR = new AtomicLong(1);
+    private final static AtomicLong ID_GENERATOR = new AtomicLong(1);
     public final static FakeValuesService fakeValuesService = new FakeValuesService(
             new Locale("en-GB"), new RandomService());
 
