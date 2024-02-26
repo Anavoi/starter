@@ -19,7 +19,7 @@ public class UserController {
     }
 
     @GetMapping("/users/{id}")
-    UserDto findOne(@PathVariable Long id) {
+    UserDto findOne(@PathVariable("id") Long id) {
         return userService.findOne(id);
     }
 
@@ -29,12 +29,12 @@ public class UserController {
     }
 
     @PutMapping("/users/{id}")
-    UserDto updatedUser(@RequestBody @Valid UserDto updatedUser, @PathVariable Long id) {
+    UserDto updateUser(@RequestBody @Valid UserDto updatedUser, @PathVariable("id") Long id) {
         return userService.updateUser(updatedUser, id);
     }
 
     @DeleteMapping("/users/{id}")
-    void deleteUser(@PathVariable Long id) {
+    void deleteUser(@PathVariable("id") Long id) {
         userService.deleteUser(id);
     }
 }
