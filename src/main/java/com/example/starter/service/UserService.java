@@ -1,6 +1,5 @@
 package com.example.starter.service;
 
-import com.example.starter.converter.UserEntityDtoMapper;
 import com.example.starter.exception.UserNotFoundException;
 import com.example.starter.model.dto.UserDto;
 import com.example.starter.model.entity.UserEntity;
@@ -10,31 +9,32 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 
 @Service
 @RequiredArgsConstructor
 public class UserService {
     private final UserRepository userRepository;
-    private final UserEntityDtoMapper userEntityDtoMapper;
+    private final ConverterService converterService;
 
     public List<UserDto> getAll() {
         final List<UserDto> userDtoList = new ArrayList<>();
         final List<UserEntity> userEntityList = userRepository.findAll();
         for (UserEntity userEntity : userEntityList) {
-            userDtoList.add(userEntityDtoMapper.entityToDto(userEntity));
+            userDtoList.add(converterService.requiredConvert(userEntity, UserDto.class));
         }
         return userDtoList;
     }
 
     public UserDto findOne(Long id) {
         final UserEntity userEntity = userRepository.findById(id).orElseThrow(() -> new UserNotFoundException(id));
-        return userEntityDtoMapper.entityToDto(userEntity);
+        return converterService.requiredConvert(userEntity, UserDto.class);
     }
 
     public UserDto createUser(UserDto newDto) {
-        final UserEntity userEntity = userEntityDtoMapper.dtoToEntity(newDto);
-        return userEntityDtoMapper.entityToDto(userRepository.save(userEntity));
+        final UserEntity userEntity = converterService.requiredConvert(newDto, UserEntity.class);
+        return converterService.requiredConvert(userRepository.save(Objects.requireNonNull(userEntity)), UserDto.class);
     }
 
     public UserDto updateUser(UserDto userDto, Long id) {
@@ -42,7 +42,7 @@ public class UserService {
         userEntity.setName(userDto.getName());
         userEntity.setEmail(userDto.getEmail());
         userEntity.setPassword(userDto.getPassword());
-        return userEntityDtoMapper.entityToDto(userRepository.save(userEntity));
+        return converterService.requiredConvert(userRepository.save(userEntity), UserDto.class);
     }
 
     public void deleteUser(Long id) {

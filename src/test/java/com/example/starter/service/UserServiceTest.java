@@ -5,6 +5,7 @@ import com.example.starter.model.dto.UserDto;
 import com.example.starter.model.entity.UserEntity;
 import com.example.starter.repository.UserRepository;
 import com.example.starter.util.MockUtils;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,11 @@ public class UserServiceTest {
                 MockUtils.makeFakeUser(),
                 MockUtils.makeFakeUser(),
                 MockUtils.makeFakeUser());
+    }
+
+    @AfterEach
+    public void tearDown() {
+        verifyNoMoreInteractions(userRepository);
     }
 
     @Test
@@ -102,6 +108,7 @@ public class UserServiceTest {
         updatedUserDto.setPassword("newPassword123");
         when(userRepository.save(userEntityList.get(2))).thenReturn(userEntityList.get(2));
         userService.updateUser(updatedUserDto, 3L);
+        verify(userRepository).findById(any());
         assertAll("Equality check",
                 () -> assertEquals(updatedUserEntity.getId(), userEntityList.get(2).getId()),
                 () -> assertEquals(updatedUserEntity.getName(), userEntityList.get(2).getName()),
